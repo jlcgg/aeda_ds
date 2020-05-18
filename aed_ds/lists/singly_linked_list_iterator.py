@@ -1,29 +1,24 @@
-from aed_ds import tad_iterator
-from aed_ds.exceptions import EmptyListException, NoSuchElementException
+from ..exceptions import *
+from ..tad_iterator import Iterator
 
-class SinglyLinkedListIterator:
-    def __init__(self, head):
-        self.head = head
-        self.current = head
+class SinglyLinkedListIterator(Iterator):
+    def __init__(self, singly_linked_list):
+        self.singly_linked_list = singly_linked_list
+        self.rewind()
+
     # Returns true iff the iteration has more elements.
-    # In other words, returns true next would return an element rather than throwing an exception.
-    
     def has_next(self):
-        return self.current.has_next()
+        return self.current_node != None
+
     # Returns the next element in the iteration.
     # Throws NoSuchElementException
-    
     def next(self):
-        if not self.current:
+        if not self.has_next():
             raise NoSuchElementException()
-        else:
-            cur = self.current
-            self.current = self.current.get_next()
-            return cur.get_element()
+        element = self.current_node.get_element()
+        self.current_node = self.current_node.get_next()
+        return element
+
     # Restarts the iteration. After rewind, if the iteration is not empty, next will return the first element in the iteration.
-    
     def rewind(self):
-        if self.current != None:
-            self.current = self.head
-        else:
-            raise EmptyListException()
+        self.current_node = self.singly_linked_list.head
