@@ -1,5 +1,6 @@
 from .tad_list import List
 from .nodes import SingleListNode
+from .singly_linked_list_iterator import SinglyLinkedListIterator
 from ..exceptions import EmptyListException, InvalidPositionException
 from .singly_linked_list_iterator import SinglyLinkedListIterator
 
