@@ -26,7 +26,7 @@ class DoublyLinkedList(SinglyLinkedList):
             self.num_elements += 1
 
     def insert(self, element, position):
-        if position > self.num_elements or position < self.num_elements:
+        if position < 0 or position > self.size():
             raise InvalidPositionException()
         else: 
             if position == 0:
@@ -55,7 +55,7 @@ class DoublyLinkedList(SinglyLinkedList):
             self.num_elements = 0
             return None
         elif self.num_elements == 0:
-            return EmptyListException()
+            raise EmptyListException()
         else:
             temp = self.head
             temp = self.head.get_next()
@@ -80,7 +80,7 @@ class DoublyLinkedList(SinglyLinkedList):
             return self.tail.get_element()
 
     def remove(self, position):
-        if position < 0 and position >= self.size():
+        if position < 0 or position >= self.size():
             raise InvalidPositionException()
         else:
             if position == 0:
